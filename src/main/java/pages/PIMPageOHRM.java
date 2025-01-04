@@ -4,6 +4,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.testng.Assert;
+
+import com.aventstack.extentreports.MediaEntityBuilder;
 
 import base.Generic;
 
@@ -32,15 +35,26 @@ public class PIMPageOHRM {
 	@FindBy(xpath = "//button [@type = 'reset']")
 	WebElement button_Reset;
 	
-	@FindBy(xpath = "//button [@type = 'submit")
+	@FindBy(xpath = "//button [@type = 'submit']")
 	WebElement button_Search;
 	
 	@FindBy(xpath ="//label[text()='Employee Name']//parent::div//following-sibling::div//input[@placeholder='Type for hints...']")
 	WebElement textbox_EmpNameInput;
 	
 	
-	public void pimPageEmployeeName(String empname) {
+	public void pimPageEmployeeName(String empname) throws Exception {
+		try {
 		textbox_EmpNameInput.sendKeys(empname);
+		
+		Generic.extentLogger.pass("Search Employee Name Successfully",
+				MediaEntityBuilder.createScreenCaptureFromPath(Generic.captureScreenshot()).build());
+	
+		} catch (Exception e) {
+			Generic.extentLogger.fail("Failed to search Employee Name",
+					MediaEntityBuilder.createScreenCaptureFromPath(Generic.captureScreenshot()).build());
+
+			Assert.fail("Failed to get Emp name in PIM page" + e.getMessage());
+		}
 	}
 	
 	public void pimPageResetSearchButton (String buttonName) {
@@ -48,11 +62,14 @@ public class PIMPageOHRM {
 		switch(buttonName) {
 		case "Search":
 			generic.clickAnElement(button_Search);
+			break;
 			
 		case "Reset" :
 			generic.clickAnElement(button_Reset);
+			break;
 		}
 	}
+	
 	
 	//span[text() = 'PIM']
 

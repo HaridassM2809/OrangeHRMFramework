@@ -13,17 +13,30 @@ public class Login_TCs extends Generic {
 //		System.out.println("Hello");
 //	}
 
-	@Test (priority = 1)
-	public void validateHRMLogin() {
-		LoginPageOHRM loginPage = new LoginPageOHRM(driver);
-		loginPage.loginOrangeHrmApplication1("Admin", "admin123");
-		
+	@Test
+	public void validateHRMLogin() throws Exception {
+
+		Generic.extentLogger = extentReport.createTest("TC01_Validating HRM login");
 		CommonPageOHRM commonPage = new CommonPageOHRM(driver);
+		LoginPageOHRM loginPage = new LoginPageOHRM(driver);
+
+		loginPage.loginOrangeHrmApplication1("Admin", "admin123");
+		commonPage.validateThePageHeader("Dashboard");
 		commonPage.goToAPage("PIM");
-		
-		
+		commonPage.validateThePageHeader("PIM");
 	}
+	
+	@Test
+	public void validateHRMLogin1() throws Exception {
 
+		Generic.extentLogger = extentReport.createTest("TC01_Validating HRM login");
+		CommonPageOHRM commonPage = new CommonPageOHRM(driver);
+		LoginPageOHRM loginPage = new LoginPageOHRM(driver);
 
+//		loginPage.loginOrangeHrmApplication1("Admin", "admin123");
+//		commonPage.validateThePageHeader("Dashboard");
+//		commonPage.goToAPage("PIM");
+		commonPage.validateThePageHeader("Dashboard");
+	}
 
 }

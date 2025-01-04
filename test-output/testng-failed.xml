@@ -6,7 +6,9 @@
       <class name="testCases.Login_TCs">
         <methods>
           <include name="launchABrowser"/>
-          <include name="pimPageVaidateWithEmpName"/>
+          <include name="extentReport"/>
+          <include name="validateHRMLogin"/>
+          <include name="flushReport"/>
         </methods>
       </class> <!-- testCases.Login_TCs -->
     </classes>
